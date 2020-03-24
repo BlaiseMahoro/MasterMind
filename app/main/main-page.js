@@ -10,6 +10,7 @@ JavaScript modules. The CommonJS require() function is how you import
 JavaScript modules defined in other files.
 */
 const createViewModel = require("./main-view-model").createViewModel;
+const ToolTip = require("nativescript-tooltip").ToolTip;
 
 function onNavigatingTo(args) {
     /*
@@ -32,6 +33,16 @@ function onNavigatingTo(args) {
     page.bindingContext = createViewModel(page);
 }
 
+function onStart(args){
+    const page = args.object.page;
+
+    const newGameButton = page.getViewById("startGame");
+    const tip = new ToolTip(newGameButton,{text:"Some Text",backgroundColor:"pink",textColor:"black", position: "right"});
+    tip.show();  
+ 
+
+}
+
 /*
 Exporting a function in a NativeScript code-behind file makes it accessible
 to the file’s corresponding XML file. In this case, exporting the onNavigatingTo
@@ -39,3 +50,4 @@ function here makes the navigatingTo="onNavigatingTo" binding in this page’s X
 file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
+exports.onStart = onStart;

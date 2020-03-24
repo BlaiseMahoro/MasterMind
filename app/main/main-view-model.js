@@ -182,8 +182,7 @@ function createViewModel(page) {
     const viewModel = new Observable();
     console.log("page", page);
     
-    const tip = new ToolTip(getViewById(page, "startGame"),{text:"Some Text",backgroundColor:"pink",textColor:"black"});
-    tip.show();  
+ 
     viewModel.restart = args => {
         const page = args.object.page;
         restart(page);
