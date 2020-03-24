@@ -14,7 +14,6 @@ function createViewModel() {
             )
     }
     viewModel.startGame=(args)=>{
-       
 
 const player = new TNSPlayer();
         player
@@ -23,6 +22,7 @@ const player = new TNSPlayer();
                 loop: false
             })
             .then(() => {
+                //console.log("Ji!")
                 player.play();
             });
         
@@ -35,8 +35,9 @@ const player = new TNSPlayer();
     viewModel.viewScores=(args)=>{
         
         Frame.topmost().navigate({
-            moduleName:'main/main-page',
+            moduleName:'score/score-page',
             context:{isTutorial:false}
+
             }
             )
     }

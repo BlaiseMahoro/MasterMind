@@ -3,8 +3,9 @@ const Frame = require("tns-core-modules/ui/frame");
 const getViewById = require("tns-core-modules/ui/core/view").getViewById;
 const appSettings = require("tns-core-modules/application-settings");
 const ToolTip = require("nativescript-tooltip").ToolTip;
-
+var isTutorial = false;
 var trials = 1;
+var playedRight= false;
 var curr_pos = 1;
 var colors_all = [
     "#FF0000",
@@ -181,20 +182,74 @@ function ask_for_user_choice(page, message="Game Over. Choose action.") {
 function createViewModel(page) {
     const viewModel = new Observable();
     console.log("page", page);
+    viewModel.onStart=(args)=>{
+        const page = args.object.page
+     const context = page.navigationContext;
+     isTutorial = context.isTutorial
+     console.log("context", isTutorial);
+     if (isTutorial){
+            const newGameButton = page.getViewById("startGame");            
+                const tip1 = new ToolTip(newGameButton,{text:"Now, tap this button to start", backgroundColor:"pink",textColor:"black", position: "bottom"});
+                tip1.show(); 
+
+           
+            
+     }
+    }
     
- 
     viewModel.restart = args => {
         const page = args.object.page;
         restart(page);
+        if (isTutorial){
+            const sw = getViewById(page, "sw1")
+            const tip = new ToolTip(sw,{text:"enable cheat mode", backgroundColor:"pink",textColor:"black", position: "top"});
+            tip.show(); 
+            setTimeout(()=>{ 
+                tip.hide();
+                const colGrid = getViewById(page, "colGrid")
+                const tip1 = new ToolTip(colGrid,{text:"Guess color", backgroundColor:"pink",textColor:"black", position: "bottom"});
+                tip1.show(); 
+                setTimeout(()=>{
+                     tip1.hide();
+
+                     const feedLabl = getViewById(page, "feed1")
+                     const tip2 = new ToolTip(feedLabl,{text:"feedback shows here..", backgroundColor:"pink",textColor:"black", position: "top"});
+                     tip2.show(); 
+                     setTimeout(()=>{
+                         tip2.hide();
+                         const tip3 = new ToolTip(colGrid,{text:"Now, practice. Tap blue button!", backgroundColor:"pink",textColor:"black", position: "top"});
+                         tip3.show(); 
+
+                     },3000)
+                }, 3000);
+            }, 3000);
+           
+     }
     };
 
     viewModel.onColorTap = args => {
         const btn = args.object;
         console.log("color", btn.backgroundColor);
         const page = Frame.topmost().currentPage;
+        if(isTutorial && !playedRight){
+            const feedLabl = getViewById(page, "feed1")
+            if(btn.backgroundColor !="#0000FF"){                
+                // const tip = new ToolTip(feedLabl,{text:"Wrong color! Tap blue", backgroundColor:"pink",textColor:"black", position: "left"});
+                // tip.show();
+                return
+                
+            }
+            else{
+            const tip3 = new ToolTip(feedLabl,{text:"Well done! Continue.", backgroundColor:"pink",textColor:"black", position: "left"});
+            tip3.show();
+            playedRight=true;
+            }
+           
+        }
         const lbl = getViewById(page, trials + "" + curr_pos);
         lbl.backgroundColor = btn.backgroundColor;
         curr_pos++;
+        
         if (curr_pos > 4) {
             var feedback = get_feedback(page);
             //viewModel.set("result",feedback)
@@ -211,9 +266,9 @@ function createViewModel(page) {
             ask_for_user_choice(page);
         }
     };
-    viewModel.switchLoaded = args => {
+    viewModel.switchLoaded = (args) => {
         let sw = args.object;
-
+        
         sw.on("checkedChange", args2 => {
             //console.log( sw.bindingContext.id );
             const page = Frame.topmost().currentPage;
@@ -232,7 +287,7 @@ function createViewModel(page) {
     viewModel.onHelpButtonTap=()=>{
         dialogs.confirm({
             title: "Game Score App",
-            message: "Developed by Baise Mahoro.\n in fulfillment of requirements for Assignment 8 of CMSC 4233 (or 5233) in the Spring 2020 course  ",
+            message: "Developed by Baise Mahoro.\n in fulfillment of requirements for Assignment 9 of CMSC 4233 (or 5233) in the Spring 2020 course  ",
             okButtonText: "OK",
 
         })

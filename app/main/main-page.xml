@@ -4,7 +4,7 @@ of which NativeScript renders with a platform-specific iOS or Android native con
 You can find a full list of user interface components you can use in your app at
 https://docs.nativescript.org/ui/components.
 -->
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" loaded="onStart">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" loaded="{{onStart}}">
     <!--
     The ActionBar is the NativeScript common abstraction over the Android ActionBar and iOS NavigationBar.
     http://docs.nativescript.org/ui/action-bar
@@ -39,13 +39,13 @@ https://docs.nativescript.org/ui/components.
         
         <StackLayout orientation="horizontal">
             <Label  text="Choose to show code:"/>
-        <Switch horizontalAlignment="left" loaded="{{switchLoaded}}" ></Switch>
+        <Switch horizontalAlignment="left" loaded="{{switchLoaded}}"  id="sw1" ></Switch>
         </StackLayout>
         <GridLayout visibility="collapsed" id="code" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" columns="50,50, 50,50, 50" >
             <Label col="0" text="Code:"/> <Label row="0" id ="c1" col="1"  width="20" height ="20" backgroundColor="gray" horizontalAlignment="left" borderRadius="15"/> <Label col="2" id ="c2" row="0"  width="20" height ="20" backgroundColor="gray" horizontalAlignment="left" borderRadius="15"/> <Label col="3" id ="c3" row="0"  width="20" height ="20" backgroundColor="gray" horizontalAlignment="left" borderRadius="15" /><Label col="4" id ="c4" row="0"  width="20" height ="20" backgroundColor="gray" horizontalAlignment="left" borderRadius="15"/>
          </GridLayout>
         <Label  text="Tap to choose color:"/>
-        <GridLayout rows="auto, auto" columns="40,40, 40,40,40,40" >
+        <GridLayout rows="auto, auto" columns="40,40, 40,40,40,40" id="colGrid">
             
             <Button row="1" col="0" text="" horizontalAlignment="left" backgroundColor="red" width="30" height="30" tap="{{onColorTap}}"/><Button row="1" col="1" text=""  horizontalAlignment="left" backgroundColor="yellow" width="30" height="30" tap="{{onColorTap}}"/><Button  row="1" col="2" text=""  horizontalAlignment="left" backgroundColor="green" width="30" height="30" tap="{{onColorTap}}"/><Button  row="1" col="3" text=""  horizontalAlignment="left" backgroundColor="blue" width="30" height="30" tap="{{onColorTap}}" /><Button row="1" col="4" text=""  horizontalAlignment="left" backgroundColor="white" width="30" height="30" tap="{{onColorTap}}"/>
             <Button row="1" col="5" text=""  horizontalAlignment="left" backgroundColor="orange" width="30" height="30" tap="{{onColorTap}}"/>
