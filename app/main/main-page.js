@@ -29,7 +29,7 @@ function onNavigatingTo(args) {
     You can learn more about data binding in NativeScript at
     https://docs.nativescript.org/core-concepts/data-binding.
     */
-    page.bindingContext = createViewModel();
+    page.bindingContext = createViewModel(page);
 }
 
 /*

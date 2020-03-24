@@ -30,7 +30,7 @@ https://docs.nativescript.org/ui/components.
     <StackLayout class="p-20">
         <StackLayout orientation="horizontal">
             <!-- <Button text="Start" color="black" backgroundColor="white" tap="{{onStart}}"></Button> -->
-            <Button text="Start a new game" color="black" backgroundColor="white" tap="{{restart}}"></Button>
+            <Button text="Start a new game" color="black" backgroundColor="white" tap="{{restart}}" id="startGame"></Button>
            
 
         </StackLayout>

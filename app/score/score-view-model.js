@@ -29,7 +29,7 @@ function createViewModel(page) {
     }
     viewModel.onHomeTap = () => {
         Frame.topmost().navigate({
-            moduleName:"main-page",
+            moduleName:"welcome/welcome-page",
             transition: {
                 name: "slide",
                 duration: 380,

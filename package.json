@@ -1,11 +1,11 @@
 {
   "nativescript": {
     "id": "org.nativescript.masterMind",
-    "tns-android": {
-      "version": "6.3.1"
-    },
     "tns-ios": {
       "version": "6.3.0"
+    },
+    "tns-android": {
+      "version": "6.5.0"
     }
   },
   "description": "NativeScript Application",
@@ -13,8 +13,11 @@
   "repository": "<fill-your-repository-here>",
   "dependencies": {
     "@nativescript/theme": "~2.2.1",
+    "nativescript-audio": "^5.0.5",
     "nativescript-exit": "^1.0.1",
-    "tns-core-modules": "~6.3.0"
+    "nativescript-tooltip": "^2.1.2",
+    "tns-android": "^6.5.0",
+    "tns-core-modules": "^6.5.0"
   },
   "devDependencies": {
     "nativescript-dev-webpack": "~1.4.0"
