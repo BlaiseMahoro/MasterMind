@@ -13,19 +13,7 @@ function createViewModel() {
             }
             )
     }
-    viewModel.startGame=(args)=>{
-
-const player = new TNSPlayer();
-        player
-            .initFromFile({
-                audioFile: "~/sounds/PowerUp1.mp3",
-                loop: false
-            })
-            .then(() => {
-                //console.log("Ji!")
-                player.play();
-            });
-        
+    viewModel.startGame=(args)=>{        
         Frame.topmost().navigate({
             moduleName:'main/main-page',
             context:{isTutorial:false}

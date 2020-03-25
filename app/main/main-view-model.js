@@ -3,6 +3,7 @@ const Frame = require("tns-core-modules/ui/frame");
 const getViewById = require("tns-core-modules/ui/core/view").getViewById;
 const appSettings = require("tns-core-modules/application-settings");
 const ToolTip = require("nativescript-tooltip").ToolTip;
+const TNSPlayer = require("nativescript-audio").TNSPlayer;
 var isTutorial = false;
 var trials = 1;
 var playedRight= false;
@@ -50,7 +51,17 @@ function get_feedback(page) {
     if( getViewById(page, trials + "" + 1).backgroundColor==colors_code[0] && getViewById(page, trials + "" + 2).backgroundColor==colors_code[1]&&getViewById(page, trials + "" + 3).backgroundColor==colors_code[2]&&getViewById(page, trials + "" + 4).backgroundColor==colors_code[3]){
         //"corr col in corr Pos:" +corr_in_pos + " corr col not in corr pos:" + corr_nin_pos +" wrong color:" + wrong_col
        
-        if(!cheated)//CHANGE THIS                                                                                                                                                                                                                                                                                                                                                                                                                                                               ! ! 
+    const player = new TNSPlayer();
+        player
+        .initFromFile({
+        audioFile: "~/sounds/win.mp3",
+        loop: false
+    })
+    .then(() => {
+        //console.log("Ji!")
+        player.play();
+    });
+        if(!cheated)                                                                                                                                                                                                                                                                                                                                                                                                                                                              ! ! 
           addScoreToScoreBoard()
         ask_for_user_choice(page,"You won! Choose Action.")
         
@@ -198,6 +209,17 @@ function createViewModel(page) {
     }
     
     viewModel.restart = args => {
+        
+const player = new TNSPlayer();
+player
+    .initFromFile({
+        audioFile: "~/sounds/PowerUp1.mp3",
+        loop: false
+    })
+    .then(() => {
+        //console.log("Ji!")
+        player.play();
+    });
         const page = args.object.page;
         restart(page);
         if (isTutorial){
@@ -228,6 +250,16 @@ function createViewModel(page) {
     };
 
     viewModel.onColorTap = args => {
+        const player = new TNSPlayer();
+        player
+            .initFromFile({
+                audioFile: "~/sounds/played.mp3",
+                loop: false
+            })
+            .then(() => {
+                //console.log("Ji!")
+                player.play();
+            });
         const btn = args.object;
         console.log("color", btn.backgroundColor);
         const page = Frame.topmost().currentPage;
